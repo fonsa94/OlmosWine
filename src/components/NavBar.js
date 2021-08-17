@@ -1,17 +1,21 @@
-const App = () => {
+import CartWidget from "./CartWidget"
 
-return (
-     <>
-        <header>
-                 <h1>VinotecaOlmos</h1>
+
+const NavBar = () => {
+
+   return (  
+        <header id="main-header">
+                 <h1>Vinoteca Olmos</h1>
                    <nav>
-<a href="">Historia</a>
-<a href="">Productos</a>
-<a href="">Contacto</a>
-                   </nav>                
-        </header>
-     </>
-)
+                      <a href="">Historia</a>                 
+                      <a href="">Contacto</a>
+                     
+                   </nav>   
+                   <CartWidget/>                        
+        </header>    
+            
+        
+        )
 }
 
-export default App
+export default NavBar
