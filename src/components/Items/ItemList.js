@@ -1,4 +1,5 @@
 import React, {useEffect ,useState} from "react"
+import { ItemList } from "./Items";
 
 const promiseEjercicio = () => {
     return new Promise ((resolve,reject) => {
@@ -43,4 +44,5 @@ const promiseEjercicio = () => {
             </ul>
        );  
   };
-  
+
+  export default ItemList

@@ -1,23 +1,27 @@
-import ItemDetail from "./components/Items/ItemDetail"
-import { Item } from "./components/Items/ItemList"
-import ItemListContainer from "./components/ListContainer/ItemListContainer"
-import NavBar from "./components/NavBar/NavBar"
-import {Route} from "react-router-dom"
-import { ItemDetailContainer } from "./components/Items/ItemDetailContainer"
-import ItemCount from "./components/Items/ItemCount"
+import "./Estilos.css";
+import { NavBar } from "./components/NavBar/NavBar";
+import ItemListContainer from "./components/ListContainer/ItemListContainer";
+import ItemDetailContainer from "./components/Items/ItemDetailContainer";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+function App() {
+  return (
+    
+    <BrowserRouter >
+      <div className="App">
+    <NavBar />
+        <Switch >
+          <Route exact path='/'> Wines</Route>
+
+          <Route path="/:category/:id" component={ItemDetailContainer} />
+
+            <Route path="/:category" component={ItemListContainer} />
 
 
-const App = () => {
-
-   
-return (   
-    <>    
-<Route path="/" component={NavBar} />
-<Route path="/category/id" component={ItemListContainer} />
-<Route path="/item/id" component={ItemDetailContainer} />
-
-    </>  
-    )
+        </Switch>
+      </div>
+    </BrowserRouter>
+  );
 }
- 
+
 export default App;

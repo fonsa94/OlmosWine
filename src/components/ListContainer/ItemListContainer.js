@@ -1,16 +1,35 @@
-import ItemCount from "../Items/ItemCount";
+import React, { useEffect, useState } from "react";
+// import {ItemCount} from './ItemCount'
+import ItemList from "../Items/ItemList"
 
+import { useParams } from "react-router-dom";
 
+export default function ItemListContainer() {
+  const [items, setItems] = useState([])
 
-const ItemListContainer = ()  => {
+  const {categoryId} = useParams()
 
+  useEffect(()=>{
 
-    return (     
-        <>
-         <ItemCount stock={10} initial={1} onAdd={(cantidad) => {console.log(cantidad)}} />
-          </>      
-   );
+    const prom = new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve([
          
-  }
+        ])
+      },2000)
+    })
 
-  export default ItemListContainer
+    prom.then((resultado)=>{
+      setItems(resultado)
+    })
+
+  })
+
+  return (
+    <div className="container ">
+      Items de la categoria {categoryId}
+      <ItemList items={items}/>
+     
+    </div>
+  );
+}

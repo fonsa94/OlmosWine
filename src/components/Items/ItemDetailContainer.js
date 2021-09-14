@@ -1,39 +1,37 @@
-import React, {useEffect ,useState} from "react"
+import React, {useState, useEffect} from 'react'
+import ItemDetail from './ItemDetail'
+import { useParams } from "react-router-dom";
 
+const getItems = (id) => { /* Esta función debe retornar la promesa que resuelva con delay */ 
+    return  new Promise((resolve)=>{
+        setTimeout(()=>{resolve({
+            title:"un Item",
+            price: 25.5,
+            description: "Un muy lindo item  con ID:" + id,
+            img:""
+        })},2000)
+    
+    
+    })
+}
 
-const URL_API_WINES = "https://mocki.io/v1/30d6dc5d-0f6a-4a3b-b1aa-dfc8e87a570f"
+export default function ItemDetailContainer() {
+    const [item, setItem] = useState(null)
+    const {itemId, otroId} = useParams()
 
-const id ="1";
-const cepa ="tinto";
+    useEffect(() => {
+        getItems(itemId).then((res)=> setItem(res))
+        return;
+    }, [itemId])
 
+    // Implementar mock invocando a getItems() y utilizando el resolver then
+     return <> {itemId} - {otroId}
+     <ItemDetail item={item} /></>/* JSX que devuelva un ItemDetail (desafío 6b) */
+    }
  
-export const ItemDetailContainer = () =>{
-    
 
-    const [dataToShow, setDataToShow] = useState([]);
-    
-
-
-useEffect(() => {
-    fetch(URL_API_WINES)
-    .then(response => response.json())
-    .then((data)=>{
-        const aux = data.filter(element=>element.cepa === cepa)
-        setDataToShow(aux);
-    }); 
-}, []);
-
-
-return (   
-   <> 
-  {dataToShow.length === 0 ? (
-      <h1>
-      cargando...
-      </h1>     
-  ) : (
-    <ul>
-    {dataToShow.map((dataToShow)=>(
-<>
+    //  "https://mocki.io/v1/6038e3db-8dec-4acb-9547-2432a4b49584"
+/* <>
 <br/>
   <div className="card card-body text-center">
   <img src={dataToShow.image} className="card-img-top img-fluid m-auto " style={{width: 120}} />
@@ -43,19 +41,6 @@ return (
    <code style={{fontSize:22}}>${dataToShow.price}</code>
    <button className="btn btn-success">Buy / Comprar</button>
    </div>
-</>
- ))}
-</ul>
-  )}
- </>
-);
-    };
+</> */
 
     
-
-
-    
-  
-      
-
-   

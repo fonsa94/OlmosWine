@@ -1,7 +1,13 @@
-const CartWidget = () => {
+import React from "react";
+import { Link } from "react-router-dom";
+function cartWidget() {
   return (
-<a href="#" className="material-icons">shopping_cart</a>
- );
+    <div className="cart-icon">
+      <Link to="/cart">
+        <span id="warn"></span>
+        <i className="fas fa-shopping-cart"></i>
+      </Link>
+    </div>
+  );
 }
-
-export default CartWidget;
+export default cartWidget;

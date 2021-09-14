@@ -6,7 +6,7 @@ import App from "./App"
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import "./estilos.css"
+// import "./estilos.css"
 
 import { BrowserRouter } from "react-router-dom"
 

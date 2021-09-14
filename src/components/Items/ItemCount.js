@@ -1,45 +1,57 @@
-import {useState} from "react"
+import React, { useEffect, useState } from "react";
+
+
+export function ItemCount({ stock, initial, onAdd }) {
+  const [count, setCount] = useState(parseInt(initial));
 
 
 
-const ItemCount = ({stock,initial,onAdd}) => {
+  const addHandle = () => {
+    setCount(count + 1);
+  };
 
-   let [contador,setContador] = useState(initial)
-   
-     const sumar = () => {
-    if (contador < stock){
-     setContador(contador + 1)
-    }
-    }
-     const restar = () => {
-         if (contador > 1) {
-     setContador(contador - 1)
-    }
-    }
-     const agregar = () => {
-     if(stock > 0) {
-         onAdd(contador)
-    }
-    }
-    if (stock > 0) {
-    return(
-        <div>
-            <p>Vino Tinto Syrah :{contador}</p>
-            <button onClick ={sumar}>+</button>
-            <button onClick ={restar}>-</button>
-            <button onClick ={agregar}>Agregar al carrito</button>
-        </div>
-    )
-}else{
-    return(
-    <div>
-    <p>Vino Tinto Syrah :{contador}</p>
-    <button onClick ={sumar}>+</button>
-    <button onClick ={restar}>-</button>
-    <button disabled>Agregar al carrito</button>
-</div>
-)
-}
+  const removeHandle = () => {
+    setCount(count - 1);
+  };
+  
+
+  const agregar = () => {
+    onAdd(count)
+  };
+
+  return (
+    <div className="w-25 flex-column align-items-strech">
+
+
+      <div className="m-2 p-2 d-flex flex-row justify-content-around align-items-center border-secondary border rounded">
+        <button
+          disabled={count <= 0}
+          className="btn btn-outline-primary"
+          type="button"
+          onClick={removeHandle}
+        >
+          -
+        </button>
+        <div>{count}</div>
+        <button
+          disabled={count >= stock}
+          className="btn btn-outline-primary"
+          type="button"
+          onClick={addHandle}
+        >
+          +
+        </button>
+      </div>
+      <button
+        
+        className="btn btn-outline-primary w-75"
+        type="button"
+        onClick={agregar }
+      >
+        Agregar al carrito
+      </button>
+    </div>
+  );
 }
 
 export default ItemCount;
