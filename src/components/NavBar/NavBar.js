@@ -1,6 +1,7 @@
 import React from "react";
-// import CartWidget from "/ProyectosCoder/IgnacioFonsa/app/src/components/Cart/cartWidget"
+
 import {Link, NavLink} from 'react-router-dom'
+import CartWidget from "../Cart/cartWidget";
 
 export const NavBar = () => {
   return (
@@ -12,17 +13,17 @@ export const NavBar = () => {
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
           <NavLink exact to='/' activeClassName="active pepe" className="nav-item nav-link" >
-            Home
+            Nosotros
           </NavLink>
-          <NavLink to={`/category/cate1`} activeClassName="active" className="nav-item nav-link" >
-            Categorias
+          <NavLink to={`/productos`} activeClassName="active" className="nav-item nav-link" >
+            Productos
           </NavLink>
-          <NavLink to={`/category/cate2`} activeClassName="active" className="nav-item nav-link" >
-            Otros Productos
+          <NavLink to={`/contactos`} activeClassName="active" className="nav-item nav-link" >
+            Contactanos
           </NavLink>
         </div>
       </div>
-      {/* <CartWidget/> */}
+      <CartWidget/>
 
       <button
         className="navbar-toggler"

@@ -4,7 +4,7 @@ const LayoutPagina =({children,titulo ="Pagina Nueva"}) => {
           <div className="pagina-cabecera">
           <h2>{titulo}</h2>
           </div>         
-          <div className = "contendio"></div>
+          <div className = "pagina-contendio"></div>
           {children}
        </section>
     )

@@ -1,18 +1,19 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import {contexto} from "./contexto"
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Items = ({producto}) => {
+export const Item = ({ item }) => {
+  return (
+    <div className="card m-2 flex-row" >
+      <img src={item.pictureUrl} alt="" style={{width: "12rem"}} />
+      <div className="card-body">
+        <h5 className="card-title">{item.title}</h5>
+        <div className="price text-success"><h5 class="mt-4">${item.price}</h5></div>
+      </div>
 
-  const {productos,addProduct} =useContext (contexto)
 
-    return (
-        <article className="flex ">
-            <h1>{producto.title}</h1>
-           <button onClick={()=>addProduct()}>Agregar Producto</button>
-           <Link to={ `/Items/${producto.id}`}>Ver mas</Link> 
-        </article>
-    )
-}
+      <Link to={`/item/${item.id}`}> Ver Detalle</Link>
 
-export default Items
+
+    </div>
+  );
+};

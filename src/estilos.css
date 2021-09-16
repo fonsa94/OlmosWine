@@ -43,3 +43,16 @@ p {
    align-items: center;
    display: flex;
 }
+
+.pagina-item {
+    width: 100%;
+}
+
+.pagina-cabecera {
+    margin-bottom: 2rem;
+}
+
+.pagina-contenido {
+    display: flex;
+    flex-wrap: wrap;
+}
