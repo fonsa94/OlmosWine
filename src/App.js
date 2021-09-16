@@ -1,9 +1,8 @@
 import "./Estilos.css";
 import { NavBar } from "./components/NavBar/NavBar";
-import ItemListContainer from "./components/ListContainer/ItemListContainer";
 import ItemDetailContainer from "./components/Items/ItemDetailContainer";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
+import VinoInfo from "./components/Items/VinoInfo"
 function App() {
   return (
     
@@ -13,9 +12,11 @@ function App() {
         <Switch >
           <Route exact path='/'> Wines</Route>
 
-          <Route path="/:category/:id" component={ItemDetailContainer} />
+          <Route exact path="/productos" component={ItemDetailContainer} />
+      
+            <Route exact path="/productos/categorias/:variedades" component={ItemDetailContainer} />
 
-            <Route path="/:category" component={ItemListContainer} />
+            <Route exact path="/productos/detalle/:id" component= {VinoInfo} />
 
 
         </Switch>

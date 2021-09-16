@@ -1,5 +1,5 @@
 import React, {useEffect ,useState} from "react"
-import { ItemList } from "./Items";
+
 
 const promiseEjercicio = () => {
     return new Promise ((resolve,reject) => {
@@ -21,7 +21,7 @@ const promiseEjercicio = () => {
 };
 
 
-  export const Item = () =>{
+  export const ItemList = () =>{
 
    const [dataToShow, setDataToShow] = useState([]);
 

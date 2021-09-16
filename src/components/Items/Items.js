@@ -1,14 +1,18 @@
-import React from 'react'
-import { Item } from './ItemList'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import {contexto} from "./contexto"
 
-export const ItemList = ({items=[]}) => {
+const Items = ({producto}) => {
 
+  const {productos,addProduct} =useContext (contexto)
 
     return (
-        <div className="flex ">
-            {items.map(item => <Item item={item}/> )}
-        </div>
+        <article className="flex ">
+            <h1>{producto.title}</h1>
+           <button onClick={()=>addProduct()}>Agregar Producto</button>
+           <Link to={ `/Items/${producto.id}`}>Ver mas</Link> 
+        </article>
     )
 }
 
-export default ItemList
+export default Items

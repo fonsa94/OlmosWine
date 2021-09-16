@@ -6,7 +6,7 @@ export const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link to='/' className="navbar-brand" >
-        Juan Commerce
+        Vinoteca Olmos
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -15,10 +15,10 @@ export const NavBar = () => {
             Home
           </NavLink>
           <NavLink to={`/category/cate1`} activeClassName="active" className="nav-item nav-link" >
-            Categoria 1
+            Categorias
           </NavLink>
           <NavLink to={`/category/cate2`} activeClassName="active" className="nav-item nav-link" >
-            Categoria 2
+            Otros Productos
           </NavLink>
         </div>
       </div>
