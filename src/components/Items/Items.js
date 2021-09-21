@@ -1,19 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-export const Item = ({ item }) => {
-  return (
-    <div className="card m-2 flex-row" >
-      <img src={item.pictureUrl} alt="" style={{width: "12rem"}} />
-      <div className="card-body">
-        <h5 className="card-title">{item.title}</h5>
-        <div className="price text-success"><h5 class="mt-4">${item.price}</h5></div>
-      </div>
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 
-      <Link to={`/item/${item.id}`}> Ver Detalle</Link>
+const Item = ({ item }) => {
+    return (
+        <NavLink to={`/item/${item.id}`}>
+            <div key={item.id} className="item-container">
+                <img className="item-img" src={item.pictureUrl} alt={`Prduct Img from id: ${item.id}`} />
+                <p className="item-title">{item.title}</p>
+                <p className="item-description">{item.description}</p>
+                <p className="item-price">AR$ {(item.price).toLocaleString('es-AR', {
+                    valute: 'USD',
+                    minimumFractionDigits: 2,
+                })}</p>
+            </div>
+        </NavLink>
 
+    )
+}
 
-    </div>
-  );
-};
+export default Item 

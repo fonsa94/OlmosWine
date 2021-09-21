@@ -1,8 +1,8 @@
 import "./Estilos.css";
-import { NavBar } from "./components/NavBar/NavBar";
+import  NavBar  from "./components/NavBar/NavBar";
 import ItemDetailContainer from "./components/Items/ItemDetailContainer";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import ItemListContainer from "./components/ListContainer/ItemListContainer";
+import ItemListContainer from "./components/Items/ListContainer/ItemListContainer";
 import ItemDetail from "./components/Items/ItemDetail";
 function App() {
   return (

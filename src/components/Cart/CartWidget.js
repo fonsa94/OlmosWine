@@ -1,14 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from 'react'
+import { CartContext } from '../../context/cartContext'
+import logoCartWidget from '../../components/Cart/Logo/carrito.png'
 
-function cartWidget() {
-  return (
-    <div className="cart-icon">
-      <Link to="/cart">
-        <span id="warn"></span>
-        <i className="fas fa-shopping-cart"></i>
-      </Link>
-    </div>
-  );
+const CartWidget = () => {
+    const { numberItems } = useContext(CartContext)
+    return (
+        <div className={`cartWidget ${numberItems > 0 ? 'visibleClass' : 'inVisibleClass'}`}>
+            <img src={logoCartWidget} className="logoCartWidget" alt="Logo del Carrito de Compras" />
+            <span className='totalItems'>{numberItems}</span>
+        </div>
+    )
 }
-export default cartWidget;
+
+export default CartWidget 
