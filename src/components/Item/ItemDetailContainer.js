@@ -16,7 +16,7 @@ export const ItemDetailContainer = () => {
           console.log("No such document!");   
         }
           setItem(doc.data());
-          console.log("Document data:", doc.data());    // doc.data() will be undefined in this case        
+          console.log("Document data:", doc.data());           
     }).catch((error) => {
         console.log("Error getting document:", error);
     });
@@ -39,4 +39,3 @@ export const ItemDetailContainer = () => {
     </div>
   );
 };
-export default ItemDetailContainer

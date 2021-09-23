@@ -1,8 +1,8 @@
 // import "./App.css";
 import { NavBar } from "../Navbar.js";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import  ItemListContainer  from "./components/Item/ItemDetailContainer";
-import ItemDetailContainer from "./components/Item/ItemListContainer";
+import  {ItemListContainer}  from "./components/Item/ItemDetailContainer";
+import {ItemDetailContainer} from "./components/Item/ItemListContainer";
 import { Cart}  from "./components/cart";
 import {CartProvider} from "./context/CartContext.js";
 
