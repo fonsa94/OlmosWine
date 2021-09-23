@@ -1,34 +1,39 @@
-import React from 'react'
+import "../../styles/navbar/Navbar.css";
+import logo from "../../assets/logo2.png";
+import { CartWidget } from "./CartWidget.js";
+import { DropDown } from "./DropDown.js";
+import { Link } from "react-router-dom";
 
-import  CartWidget  from '../../components/Cart/cartWidget'
-import { Link } from 'react-router-dom'
-function NavBar() {
-
-    return (
-        <nav className="navbar">
-            <div className="logo-container">
-                <Link to='/'>
-                    <img/>
-                </Link>
-            </div>
-            <div className="container">
-                <ul className="navbar-container">
-                    <li className='nav-link'>
-                        <Link to='/categories' >
-                            Categorias
-                        </Link>
-                    </li>
-                    <li className="nav-link"><Link to='/ofertas' >
-                        Ofertas
-                    </Link></li>
-                </ul>
-                <Link to='/cart'>
-                    <CartWidget />
-                </Link>
-            </div>
-
+export const NavBar = () => {
+  return (
+    <div className="navbar navbar-expand-lg navbar-secondary  bg-light">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to={"/"}>
+          <img
+            src={logo}
+            alt=""
+            width="300"
+            className="d-inline-block align-text-top"
+          ></img>
+        </Link>
+        <nav className="navigation">
+          <ul className="links navbar-nav mr-auto">
+            <li className="link nav-item">
+            <Link to={"/"}>Inicio</Link>
+            </li>
+            <li className="link nav-item">
+              <DropDown />
+            </li>
+            <li className="link nav-item">
+              <Link to={"/"}>Contacto</Link>
+            </li>
+            <li className="link nav-item">
+            <Link to={"/cart"}> <CartWidget /></Link>
+             
+            </li>
+          </ul>
         </nav>
-    )
-}
-
-export default NavBar 
+      </div>
+    </div>
+  );
+};
