@@ -1,75 +1,63 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from 'react'
 
-export const CartContext = createContext();
 
-export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  
-  const calculateTotal = () => {
-    let subtotal = 0;
-    cart.map(
-      (article) => (subtotal = subtotal + article.quantity * article.price)
-    );
-    return subtotal;
-  };
+const CartContext = createContext()
 
-  const totalQuantity = () => {
-    let total = 0;
-    cart.map(
-      (article) => (total = total + article.quantity)
-    );
-    return total;
-  };
-  
 
-  const addItem = (item, quantity) => {
-   if (isInCart(item[0].id)){
-      const Index = cart.findIndex((i) => i.id === item[0].id);
-      cart[Index] = {
-        ...cart[Index],
-        quantity: cart[Index].quantity + quantity,
-      };
-    } else {
-      setCart([
-        ...cart,
-        {
-          "id": item[0].id,
-          "idCat": item[0].idCat,
-          "title": item[0].title,
-          "price": item[0].price,
-          "picture": item[0].picture ,
-          "quantity": quantity ,
-        },
-      ]);
+const CartProvider = ({ children, defaultCart = [] }) => {
+    const [cart, setCart] = useState(defaultCart)
+    const [numberItems, setNumberItems] = useState(0)
+
+
+
+    const removeItem = (itemId, quantity) => {
+        const newCart = cart.slice()
+        const filterCart = newCart.filter(obj => obj.item.id !== itemId)
+        setCart(filterCart)
+        setNumberItems(parseInt(numberItems) - parseInt(quantity))
+
     }
- 
-  };
 
-  const clear = () => {
-    setCart([]);
-  };
 
-  const removeItem = (itemID) => {
-    const Index = cart.findIndex((item) => item.id === itemID);
-    const NewCart=  Array.from(cart);;
-    if (Index >= 0) {
-      NewCart.splice(Index, 1) ;
+    const addItem = (item, quantity) => {
+        if (isInCart(item.id)) { 
+            console.log('Item existente en Cart.. Se sumo la cantidad elegida')
+            const object = cart.find(obj => obj.item.id === item.id) 
+            object.quantity += quantity 
+            setNumberItems(parseInt(numberItems) + parseInt(quantity))
+
+        } else {
+            updateCart({ item, quantity })
+            setNumberItems(parseInt(numberItems) + parseInt(quantity))
+
+        }
     }
-    setCart(NewCart);
-  };
 
-  const isInCart = (itemID) => {
-    const Index = cart.findIndex((item) => item.id === itemID);
-    if (Index ===-1) {
-      return false;
+
+    const clearCart = () => {
+        console.log('clearCart: Cart borrado y sin items');
+        setCart(defaultCart)
+        setNumberItems(0)
+
     }
-      return true;
-  };
 
-  return (
-    <CartContext.Provider
-      value={{ cart, addItem, removeItem, clear, isInCart, totalQuantity, calculateTotal }}>
-      {children}
-    </CartContext.Provider>
-  );
+
+    const isInCart = (itemId) => {
+        return cart.find(obj => obj.item.id === parseInt(itemId)) ? true : false
+    }
+
+
+
+    const updateCart = (obj) => {
+        setCart([...cart, obj])
+    }
+
+    return (
+
+        <CartContext.Provider value={{ cart, numberItems, clearCart, addItem, updateCart, removeItem }}>
+            {children}
+        </CartContext.Provider>
+    )
 }
+
+export { CartProvider, CartContext }

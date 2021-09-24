@@ -1,15 +1,20 @@
-import App from './App';
-import React from 'react';
-import "../index.css";
-import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import React from "react"
+
+import ReactDOM from "react-dom"
+
+import App from "./App"
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./estilos.css"
+
+import { BrowserRouter } from "react-router-dom"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <BrowserRouter>
+        <App/>
+        </BrowserRouter>
+    </React.StrictMode>,
+document.getElementById('root')
 );
-
-reportWebVitals();
