@@ -41,7 +41,7 @@ const ItemDetail = ({ item }) => {
                         <h3 className="product-detail-price">${item.price}</h3>
 
                         <h4 className="product-detail-description">Descripcion</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit augue nibh ullamcorper diam, suscipit faucibus habitant proin rhoncus justo himenaeos eleifend vivamus senectus, sociosqu in hendrerit venenatis pretium cursus nulla interdum nisi potenti.</p>
+                        <p>{item.description}</p>
                         <div className="col s12 m8 offset-m2 text-center">
                         <ItemCount stock={item.stock} initial={1} onAdd={onAdd}/>
                             {

@@ -3,6 +3,7 @@ import CartWidget from './CartWidget'
 import { Link } from 'react-router-dom'
 import CartContext from './../context/CartContext';
 import "../../src/css/NavBar.css" 
+import M from "materialize-css"
 
 function NavBar({ categories }) {
     const [loaded, setLoaded] = useState(false);
@@ -11,7 +12,8 @@ function NavBar({ categories }) {
     useEffect(() => {
         if(!loaded)
         {
-            let elems = document.querySelectorAll('.dropdown-trigger');           
+            let elems = document.querySelectorAll('.dropdown-trigger'); 
+            M.Dropdown.init(elems, {inDuration :300, outDuration :225 });          
             setLoaded(true);
         }
     }, [loaded]);
@@ -35,11 +37,11 @@ function NavBar({ categories }) {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
-            <Link to="/" className="nav-item nav-link">
-              home
+            <Link to="/*" className="nav-item nav-link">
+              Quines somos
             </Link>
             <Link  to="/category/1" className="nav-item nav-link">
-              Productos
+              Ofertas!
             </Link>
             <Link to="/category/2" className="nav-item nav-link">
               Proximamente

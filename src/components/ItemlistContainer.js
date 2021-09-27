@@ -7,14 +7,12 @@ import ItemList from './ItemList'
 const db = getFirestore();
 const itemCollection = db.collection('items');
 
-
 const ItemListContainer = ({ greeting }) => {
 
     const[items, setItems] = useState(null);
     const[dataLoaded, setDataLoaded] = useState(false);
     const { categoryId } = useParams();
 
-    
     useEffect(() => {
         setDataLoaded(false);
 
@@ -42,15 +40,15 @@ const ItemListContainer = ({ greeting }) => {
         }
         else
             itemCollection.get().then(callback);
+
     }, [categoryId]);
-    
 
     return(
         <>
             {
                 dataLoaded || 
                 <div className="progress">
-                    <div className="indeterminate"></div>
+                    <div className="indeterminate">CARGANDO...</div>
                 </div>
             }
             
