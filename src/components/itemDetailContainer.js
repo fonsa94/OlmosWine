@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
-
+import { getFirestore } from './../firebase/index';
 import ItemDetail from './itemDetail'
-import Products from './../data/Products.json'
 
-const productsList = Products;
+
+const db = getFirestore();
+const itemCollection = db.collection('items');
 
 const ItemDetailContainer = () => {
 
@@ -15,19 +16,28 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
        
-        const getProduct = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                let product = productsList.find(product => product.id == itemId);
+        let callback = (doc) => {
+            let data;
 
-                resolve(product);
-            }, 2000);
-        })
-        .then((data) => {
+            if (!doc.exists) {
+                console.log('No results');
+                setDataLoaded(true);
+            }
+            else
+            {
+                data = doc.data();
+                data.id = doc.id;
+            }
+
+            console.log(data);
             setItem(data);
-            setDataLoaded(true); 
-        });
-    });
-    
+            setDataLoaded(true);
+        };
+
+        if(itemId)
+            itemCollection.doc(itemId).get().then(callback);
+
+    }, [itemId]);
 
     return(
         <>
@@ -47,4 +57,3 @@ const ItemDetailContainer = () => {
 
 export default ItemDetailContainer;
 
-// https://mocki.io/v1/2e6d5b66-7433-464b-ad4c-c0c677e1dbe7"

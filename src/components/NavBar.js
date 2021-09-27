@@ -38,7 +38,7 @@ function NavBar({ categories }) {
             <Link to="/" className="nav-item nav-link">
               home
             </Link>
-            <Link to="/category/1" className="nav-item nav-link">
+            <Link  to="/category/1" className="nav-item nav-link">
               Productos
             </Link>
             <Link to="/category/2" className="nav-item nav-link">

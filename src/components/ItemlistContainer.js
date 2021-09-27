@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
-
+import { getFirestore } from './../firebase/index';
 import ItemList from './ItemList'
 
-import Products from './../data/Products.json'
 
-const productList = Products;
+const db = getFirestore();
+const itemCollection = db.collection('items');
+
 
 const ItemListContainer = ({ greeting }) => {
 
@@ -17,18 +18,30 @@ const ItemListContainer = ({ greeting }) => {
     useEffect(() => {
         setDataLoaded(false);
 
-        const getProducts = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                let products = (categoryId) ? productList.filter(product => product.categoryId == categoryId) : [...productList];
-                
-                console.log(products);
-                resolve(products);
-            }, 2000);
-        })
-        .then((data) => {
-            setItems(data);
-            setDataLoaded(true); 
-        });
+        let callback = (querySnapshot) => {
+            if (querySnapshot.size === 0) {
+                console.log('No results');
+                setDataLoaded(true);
+            }
+
+            console.log(querySnapshot);
+            setItems(querySnapshot.docs.map(doc => {
+                let data = doc.data();
+                data.id = doc.id;
+
+                return data;
+            }));
+            setDataLoaded(true);
+        };
+
+        if(categoryId)
+        {
+            
+            let categoryIdParam = Number.parseInt(categoryId);
+            itemCollection.where("categoryId", "==", categoryIdParam).get().then(callback);
+        }
+        else
+            itemCollection.get().then(callback);
     }, [categoryId]);
     
 
