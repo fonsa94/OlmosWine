@@ -12,27 +12,19 @@ const itemCollection = db.collection('categories');
 
 function App() {
 
-  const[dataLoaded, setDataLoaded] = useState(false);
+  
   const[categories, setCategories] = useState([]);
 
 
   
   useEffect(() => {
-    let callback = (querySnapshot) => {
-      if (querySnapshot.size === 0) {
-          console.log('No categories');
-          setDataLoaded(true);
-      }
-
-      console.log(querySnapshot);
+    let callback = (querySnapshot) => {   
       setCategories(querySnapshot.docs.map(doc => {
           let data = doc.data();
           data.id = doc.id;
 
           return data;
       }));
-
-      setDataLoaded(true);
     };
 
     itemCollection.get().then(callback);

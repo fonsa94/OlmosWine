@@ -1,7 +1,9 @@
 
 * {
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    /* box-sizing: border-box; */
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;   
+    margin: 0;
+    padding: 0;
+      
 
 }
 
@@ -111,7 +113,6 @@ p{
 
 .item-detail-picture-container{
     padding-top:25px !important;
-    /* padding: 25px 0px !important; */
     overflow: hidden;
 }
 

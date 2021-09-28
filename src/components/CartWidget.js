@@ -6,9 +6,11 @@ const CartWidget = () =>{
 
     const { cartSize } = useContext(CartContext);
 
-    console.log(cartSize);
+    
     return(
-        <NavLink className="waves-effect waves-light btn" to={"/cart"}>{ cartSize } <i className="material-icons left">shopping_cart</i></NavLink>
+        <NavLink className="waves-effect waves-light btn" to={"/cart"}>
+            { cartSize } <i className="material-icons left">shopping_cart</i>
+        </NavLink>
     )
 }
 

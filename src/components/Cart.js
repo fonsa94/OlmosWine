@@ -17,13 +17,12 @@ const Cart = () => {
     const[email, setEmail] = useState("");
     const[phone, setPhone] = useState("");
     const[formMsg, setFormMsg] = useState("");
-
     const[orderId, setOrderId] = useState("");
 
 
     useEffect(() => {
         let sum = 0;
-        cart.map(obj => {
+        cart.forEach(obj => {
             sum += (obj.item.price * obj.quantity);
         });
 
@@ -36,7 +35,7 @@ const Cart = () => {
 
             setPageLoaded(true);
         }
-    }, [cart]);
+    }, [cart, pageLoaded]);
 
     const removeItemHandler = (id) => {
         removeItem(id);
@@ -45,27 +44,7 @@ const Cart = () => {
         clearCart();
     }
 
-    const sendOrder = (order, callback) => {
-        
-        itemCollection.add(order)
-        .then((res) => {
-            let elem = document.getElementById("order-info-modal");
-            let modalInstance = M.Modal.getInstance(elem);
-
-            console.log(`Order added with Id: ${res.id}`);
-            setOrderId(res.id);
-            clearCart();
-            setFullName("");
-            setEmail("");
-            setPhone("");
-            callback();
-            modalInstance.open();
-        })
-        .catch((error) => {
-            console.error(`Error adding order: ${error}`);
-        });
-    };
-
+   
     const sendBuyerInfo = () => {
         let elem = document.getElementById("buyer-info-modal");
         let modalInstance = M.Modal.getInstance(elem);
@@ -107,13 +86,37 @@ const Cart = () => {
                 'phone': phone
             },
             'items': items,
-        
+            'date': Date.now(),
             'total': totalPrice
         }
 
         sendOrder(order, () => { modalInstance.close() });
         return null;
     }
+
+    const sendOrder = (order, callback) => {
+       
+        itemCollection.add(order)
+        .then((res) => {
+            let elem = document.getElementById("order-info-modal");
+            let modalInstance = M.Modal.getInstance(elem);
+
+            setOrderId(res.id);
+
+            
+            clearCart();
+            setFullName("");
+            setEmail("");
+            setPhone("");
+
+            callback();
+
+            modalInstance.open();
+        })
+        .catch((error) => {
+            console.error(`Error adding order: ${error}`);
+        });
+    };
 
     const closeOrderInfo = () => {
         let elem = document.getElementById("order-info-modal");
@@ -125,7 +128,7 @@ const Cart = () => {
 
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="row">
                 <div className="col s12 m12 text-center">
                     <h1>Finalice su compra!</h1>
@@ -146,11 +149,11 @@ const Cart = () => {
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button onClick={ closeOrderInfo } className="waves-effect waves-green btn">Enviar</button>
+                        <button onClick={ closeOrderInfo } className="waves-effect waves-green btn">Terminar!</button>
                     </div>
                 </div>
 
-                <div id="buyer-info-modal" className="modal">
+                <div id="buyer-info-modal" className="fluid container">
                     <div className="modal-content">
                         <div className="row">
                             <form className="col s12">
@@ -161,32 +164,41 @@ const Cart = () => {
                                     </div>
                                     <div className="input-field col s12">
                                         <i className="material-icons prefix">account_circle</i>
-                                        <input  id="full_name" type="text" className="validate"  onChange={e => setFullName(e.target.value)} />
+                                        <br/>
                                         <label htmlFor="full_name">Nombre Completo</label>
+                                        <input  id="full_name" type="text" className="validate"  onChange={e => setFullName(e.target.value)} />
                                     </div>
                                     <div className="input-field col s12">
-                                        <i className="material-icons prefix">mail</i>
-
-                                        <input  id="email" type="email" className="validate" onChange={e => setEmail(e.target.value)} />
+                                        <i className="material-icons prefix">mail</i>     
+                                        <br />                                        
                                         <label htmlFor="email">Email</label>
+                                        <br />
+                                        <input  id="email" type="email" className="validate" onChange={e => setEmail(e.target.value)} />
+                                        
                                     </div>
                                     <div className="input-field col s12">
                                         <i className="material-icons prefix">cellphone</i>
-                                        <input  id="number" type="text" className="validate" onChange={e => setPhone(e.target.value)}/>
+                                        <br/>
                                         <label htmlFor="number">Telefono</label>
+                                        <br />
+                                        <input  id="number" type="text" className="validate" onChange={e => setPhone(e.target.value)}/>
+                                        
                                     </div>
                                     <div className="col s12 text-center">
                                         <p><strong>{ formMsg }</strong></p>
+                                        <div className="d-grid gap-2 col-6 mx-auto">
+                        <br />
+                        <button onClick={ sendBuyerInfo } class="btn btn-outline-primary me-md-2">Enviar!</button>
+                    </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <div className="modal-footer">
-                        <button onClick={ sendBuyerInfo } className="waves-effect waves-green btn">Enviar!</button>
-                    </div>
+                    <br />
+                  
                 </div>
-
+                         
                 {
                     cartSize > 0 
                     ?
@@ -206,9 +218,9 @@ const Cart = () => {
                                         cart.map(obj => {
                                             return (
                                                 <li key={ obj.item.id } className="collection-item avatar">
-                                                    <img src={ obj.item.pictureURL } alt="" className="circle" />
+                                                    <img src={ obj.item.pictureURL } alt="" className="img-fluid" />
                                                     <span className="title">{ obj.item.title }</span>
-                                                    <p>Cantidad: { obj.quantity } <br />
+                                                    <p class="text-center">Cantidad: { obj.quantity } <br />
                                                         Precio: ${ obj.quantity * obj.item.price }
                                                     </p>
                                                     <button 
@@ -223,9 +235,9 @@ const Cart = () => {
                                     }
                                 </ul>
                             </div>
-                            <div className="col s12 m12 text-center" style={{ paddingBottom: "25px"}}>
+                            <div className="text-end" style={{ paddingBottom: "25px"}}>
                                 <h5> Precio Total: ${ totalPrice }</h5>
-                                <button data-target="buyer-info-modal" className="btn waves-effect waves-light modal-trigger">Comprar!</button>
+                                <button data-target="buyer-info-modal" className="btn btn-outline-primary">Comprar!</button>
                             </div>
 
 
@@ -242,8 +254,10 @@ const Cart = () => {
 
 
                 }
-            </div>
+            </div>        
         </div>
+
+        
     )
 }
 export default Cart;

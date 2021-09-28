@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState} from "react";
 import CartContext from './../context/CartContext'
 
 const CartProvider = ({ defaultValue = [] , children}) =>
@@ -41,7 +41,7 @@ const CartProvider = ({ defaultValue = [] , children}) =>
         console.log(`isInCart called for item Id [${id}]`);
         let isIn = false;
         
-        if(id != undefined)
+        if(id !== undefined)
             isIn = cart.find(obj => obj.item.id === id);
 
         return (isIn === undefined) ? false : isIn;

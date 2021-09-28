@@ -9,7 +9,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
     useEffect(() => {
         setAddDisabled((counter >= stock));
         setRemoveDisabled((counter <= initial));
-    }, [counter])
+    }, [counter, initial, stock])
     
     return(
         <div className="item-count-container">

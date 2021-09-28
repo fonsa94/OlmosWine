@@ -8,16 +8,17 @@ const ItemDetail = ({ item }) => {
 
     const[addedToCart, setAddedToCart] = useState(false);
 
-    const onAdd = (quantity) => {
-        addItem(item, quantity);
-    };
 
     useEffect(() => {
         let value = isInCart(item.id);
 
         setAddedToCart(value);
             
-    }, [cart]);
+    }, [cart, isInCart, item.id]);
+
+    const onAdd = (quantity) => {
+        addItem(item, quantity);
+    };
 
     return(
         <div className="row item-detail">
@@ -33,7 +34,7 @@ const ItemDetail = ({ item }) => {
 
                     </div>
                     <div className="col s12 m6 item-detail-picture-container">
-                        <img className="item-detail-picture" src={item.pictureURL} />
+                    <img className="item-detail-picture" alt={item.title} src={item.pictureURL} />
                     </div>
                     <div className="col s12 m6 item-detail-info-container">
                         <label>{item.category}</label>
