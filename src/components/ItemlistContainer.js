@@ -19,16 +19,15 @@ const ItemListContainer = ({ greeting }) => {
         let callback = (querySnapshot) => {
             if (querySnapshot.size === 0) {
                 console.log('No results');
-                setDataLoaded(true);
             }
 
-            console.log(querySnapshot);
             setItems(querySnapshot.docs.map(doc => {
                 let data = doc.data();
                 data.id = doc.id;
 
                 return data;
             }));
+
             setDataLoaded(true);
         };
 
@@ -42,6 +41,7 @@ const ItemListContainer = ({ greeting }) => {
             itemCollection.get().then(callback);
 
     }, [categoryId]);
+    
 
     return(
         <>
@@ -52,14 +52,14 @@ const ItemListContainer = ({ greeting }) => {
                 </div>
             }
             
-            <div className="container text-center item-list-container">
-                <div className="row">
+            <div className="container text-center item-list-container">    
+            <div className="row">        
                     <div className="col s12 m12 page-title">{ greeting }</div>
                     <br />
                     <div className="col s12 m12">
                         { dataLoaded && <ItemList items={items}/> }
-                    </div>
-                </div>
+                    </div>  
+                    </div>              
             </div>
         </>
     )

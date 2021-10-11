@@ -127,78 +127,69 @@ const Cart = () => {
     }
 
 
+    
     return (
-        <div className="container-fluid">
+        <div className="container">
             <div className="row">
                 <div className="col s12 m12 text-center">
-                    <h1>Finalice su compra!</h1>
-
+                    <h1>Finalizar Compra</h1>
                 </div>
-
+                
                 <div id="order-info-modal" className="modal">
                     <div className="modal-content">
                         <div className="row">
                             <form className="col s12">
                                 <div className="row">
                                     <div className="col s12">
-                                        <h4>Informacion de la Orden</h4>
-                                        <p>Su orden se ha realizado correctamente. tu ID personal es: {orderId}</p>
+                                        <h4>Informacion</h4>
+                                        <p>Su Orden ha sido Proceseda correctamente. Su ID es: {orderId}</p>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button onClick={ closeOrderInfo } className="waves-effect waves-green btn">Terminar!</button>
+                        <button onClick={ closeOrderInfo } className="waves-effect waves-green btn">Terminar</button>
                     </div>
                 </div>
 
-                <div id="buyer-info-modal" className="fluid container">
+                <div id="buyer-info-modal" className="modal">
                     <div className="modal-content">
                         <div className="row">
                             <form className="col s12">
                                 <div className="row">
                                     <div className="col s12">
-                                        <h4>Infromacion del Comprador</h4>
-                                        <p>Para finalizar la compra necesitamos la siguiente informacion </p>
+                                        <h4>Informacion</h4>
+                                        <p>Para finalizar la compra necesitaremos la siguiente informacion</p>
                                     </div>
                                     <div className="input-field col s12">
                                         <i className="material-icons prefix">account_circle</i>
-                                        <br/>
-                                        <label htmlFor="full_name">Nombre Completo</label>
                                         <input  id="full_name" type="text" className="validate"  onChange={e => setFullName(e.target.value)} />
+                                        <label htmlFor="full_name">Nombre Completo</label>
                                     </div>
                                     <div className="input-field col s12">
-                                        <i className="material-icons prefix">mail</i>     
-                                        <br />                                        
-                                        <label htmlFor="email">Email</label>
-                                        <br />
+                                        <i className="material-icons prefix">email</i>
+
                                         <input  id="email" type="email" className="validate" onChange={e => setEmail(e.target.value)} />
-                                        
+                                        <label htmlFor="email">Email</label>
                                     </div>
                                     <div className="input-field col s12">
-                                        <i className="material-icons prefix">cellphone</i>
-                                        <br/>
-                                        <label htmlFor="number">Telefono</label>
-                                        <br />
+                                        <i className="material-icons prefix">local_phone</i>
                                         <input  id="number" type="text" className="validate" onChange={e => setPhone(e.target.value)}/>
-                                        
+                                        <label htmlFor="number">Telefono</label>
                                     </div>
                                     <div className="col s12 text-center">
                                         <p><strong>{ formMsg }</strong></p>
-                                        <div className="d-grid gap-2 col-6 mx-auto">
-                        <br />
-                        <button onClick={ sendBuyerInfo } class="btn btn-outline-primary me-md-2">Enviar!</button>
-                    </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
-                    <br />
-                  
+                    <div className="modal-footer">
+                        <button onClick={ sendBuyerInfo } className="waves-effect waves-green btn">Enviar</button>
+                    </div>
                 </div>
-                         
+
                 {
                     cartSize > 0 
                     ?
@@ -218,10 +209,10 @@ const Cart = () => {
                                         cart.map(obj => {
                                             return (
                                                 <li key={ obj.item.id } className="collection-item avatar">
-                                                    <img src={ obj.item.pictureURL } alt="" className="img-fluid" />
+                                                    <img src={ obj.item.pictureURL } alt="" className="circle" />
                                                     <span className="title">{ obj.item.title }</span>
-                                                    <p class="text-center">Cantidad: { obj.quantity } <br />
-                                                        Precio: ${ obj.quantity * obj.item.price }
+                                                    <p>Unidades: { obj.quantity } <br />
+                                                        Price: ${ obj.quantity * obj.item.price }
                                                     </p>
                                                     <button 
                                                         className="secondary-content waves-effect waves-light btn"
@@ -235,29 +226,27 @@ const Cart = () => {
                                     }
                                 </ul>
                             </div>
-                            <div className="text-end" style={{ paddingBottom: "25px"}}>
+                            <div className="col s12 m12 text-center" style={{ paddingBottom: "25px"}}>
                                 <h5> Precio Total: ${ totalPrice }</h5>
-                                <button data-target="buyer-info-modal" className="btn btn-outline-primary">Comprar!</button>
+                                <button data-target="buyer-info-modal" className="btn waves-effect waves-light modal-trigger">Comprar!</button>
                             </div>
-
-
+                            
+                            
                         </>
-
+                        
                     :
                         <div className="col s12 m12 text-center" style={{ paddingBottom: "25px"}}>
                             <hr></hr>
-                            <h4>No hay Items en el carrito!.</h4>
-                            <Link to={"/"} className="waves-effect waves-light btn" >Mira nuestros productos</Link> 
+                            <h4>No hay Articulos en el carrito.</h4>
+                            <Link to={"/"} className="waves-effect waves-light btn" >más Productos!</Link> 
 
-
+                            
                         </div>
 
-
+                        
                 }
-            </div>        
+            </div>
         </div>
-
-        
     )
 }
 export default Cart;

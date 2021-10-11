@@ -7,6 +7,7 @@ import ItemDetailContainer from './components/itemDetailContainer'
 import Cart from './components/Cart'
 import CartProvider from './providers/CartProvider'
 
+
 const db = getFirestore();
 const itemCollection = db.collection('categories');
 

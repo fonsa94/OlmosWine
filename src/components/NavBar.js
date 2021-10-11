@@ -1,13 +1,12 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect} from 'react'
 import CartWidget from './CartWidget'
 import { Link } from 'react-router-dom'
-import CartContext from './../context/CartContext';
 import "../../src/css/NavBar.css" 
 import M from "materialize-css"
 
 function NavBar({ categories }) {
     const [loaded, setLoaded] = useState(false);
-    const { cartSize } = useContext(CartContext);
+    
 
     useEffect(() => {
         if(!loaded)
@@ -37,17 +36,10 @@ function NavBar({ categories }) {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
-            <Link to="/*" className="nav-item nav-link">
-              Quines somos
-            </Link>
+          
             <Link  to="/category/1" className="nav-item nav-link">
               Ofertas!
-            </Link>
-            <Link to="/category/2" className="nav-item nav-link">
-              Proximamente
-            </Link>
-         
-              
+            </Link>                   
             
           </ul>
           <div className="widgets d-flex align-items-center">
